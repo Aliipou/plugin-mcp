@@ -22,6 +22,23 @@ packages = ["dos_plugin_mcp"]
 line-length = 100
 target-version = "py311"
 
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_ignores = true
+warn_redundant_casts = true
+
+# decision-os-min is an external dependency without published type stubs.
+[[tool.mypy.overrides]]
+module = "decision_os_min.*"
+ignore_missing_imports = true
+
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]

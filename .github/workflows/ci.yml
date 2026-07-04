@@ -1,0 +1,25 @@
+name: ci
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "${{ matrix.python-version }}"
+      - run: python -m pip install --upgrade pip
+      # decision-os-min is not on PyPI; install it from its public source repo.
+      - run: pip install "decision-os-min @ git+https://github.com/Aliipou/decision-os-min.git"
+      - run: pip install -e . --no-deps
+      - run: pip install ruff mypy pytest
+      - run: ruff check .
+      - run: mypy .
+      - run: pytest -q
+        env:
+          AUTHGATE_BACKEND: python
