@@ -1,5 +1,7 @@
 # plugin-mcp
 
+**Live (graph):** [https://ali-plugin-mcp.vercel.app](https://ali-plugin-mcp.vercel.app)
+
 Model Context Protocol (MCP) tool adapter for the Decision OS / AuthGate stack.
 
 > Part of the Decision OS — governed by the Legitimacy ⊥ Authority pipeline
